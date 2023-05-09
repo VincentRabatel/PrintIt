@@ -17,8 +17,12 @@ const slides = [
 	}
 ]
 
+// Get carousel arrows
+const arrow_left = document.getElementById('arrow_left')
+const arrow_right = document.getElementById('arrow_right')
 
-// Dots
+
+// Create carousel dots
 dots = document.getElementById('dots')
 
 let dotsArray = []
@@ -33,15 +37,36 @@ for (let i = 0; i < slides.length; i++) {
 
 dotsArray[0].classList.add('dot_selected')
 
-
-// Arrows
-const arrow_left = document.getElementById('arrow_left')
-const arrow_right = document.getElementById('arrow_right')
-
-
-
 currentSlideIndex = 0
 
+
+// Get carousel background image and text elements
+carouselImage = document.getElementById('carousel_image');
+carouselTagLine = document.getElementById('carousel_tagLine');
+
+
+// Update carousel
+function updateCarousel() {
+	// Update dots styling
+	for (let i = 0; i < slides.length; i++) {	
+		if(currentSlideIndex == i) {
+			dotsArray[i].classList.add('dot_selected')
+		}
+
+		else {
+			dotsArray[i].classList.remove('dot_selected')
+		}
+	}
+
+	// Update background image
+	carouselImage.src = "./assets/images/slideshow/" + slides[currentSlideIndex].image;
+
+	// Update text
+	carouselTagLine.innerHTML = slides[currentSlideIndex].tagLine;
+}
+
+
+// Listen when click on arrows
 arrow_left.addEventListener('click', function() {
 	// Update currentSlideIndex
 	currentSlideIndex = currentSlideIndex - 1 ;
@@ -52,18 +77,7 @@ arrow_left.addEventListener('click', function() {
 
 	console.log("Current slide index is " + currentSlideIndex);
 
-	// Update dots
-	for (let i = 0; i < slides.length; i++) {	
-		if(currentSlideIndex == i) {
-			dotsArray[i].classList.add('dot_selected')
-		}
-
-		else {
-			dotsArray[i].classList.remove('dot_selected')
-		}
-
-		//console.log("If " + currentSlideIndex + " is equal to " + i + " ?")
-	}
+	updateCarousel();
 })
 
 arrow_right.addEventListener('click', function(){
@@ -76,16 +90,5 @@ arrow_right.addEventListener('click', function(){
 
 	console.log("Current slide index is " + currentSlideIndex);
 
-	// Update dots
-	for (let i = 0; i < slides.length; i++) {
-		if(currentSlideIndex == i) {
-			dotsArray[i].classList.add('dot_selected')
-		}
-
-		else {
-			dotsArray[i].classList.remove('dot_selected')
-		}
-
-		//console.log("If " + currentSlideIndex + " is equal to " + i + " ?")
-	}
+	updateCarousel();
 })
