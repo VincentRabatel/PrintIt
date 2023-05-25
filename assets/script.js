@@ -17,13 +17,13 @@ const slides = [
 	}
 ]
 
-// Get carousel arrows
+/* Get carousel arrows */
 const arrow_left = document.querySelector(".arrow_left")
 const arrow_right = document.querySelector(".arrow_right")
 
 
-// Create carousel dots
-dots = document.getElementById('dots')
+/* Create carousel dots */
+const dots = document.querySelector('#dots')
 
 let dotsArray = []
 
@@ -37,15 +37,44 @@ for (let i = 0; i < slides.length; i++) {
 
 dotsArray[0].classList.add('dot_selected')
 
-currentSlideIndex = 0
+
+/* Get carousel background image and text elements */
+const carouselImage = document.querySelector(".carousel_img")
+const carouselTagLine = document.querySelector(".carousel_tagLine")
 
 
-// Get carousel background image and text elements
-carouselImage = document.querySelector(".carousel_img")
-carouselTagLine = document.querySelector(".carousel_tagLine")
+/* Listen when click on left arrow */
+arrow_left.addEventListener('click', function() {
+	// Update currentSlideIndex
+	currentSlideIndex = currentSlideIndex - 1
+
+	if (currentSlideIndex < 0){
+		currentSlideIndex = slides.length - 1
+	}
+
+	console.log("Current slide index is " + currentSlideIndex)
+
+	updateCarousel()
+})
+
+/* Listen when click on right arrow */
+arrow_right.addEventListener('click', function(){
+	// Update currentSlideIndex
+	currentSlideIndex = currentSlideIndex + 1
+
+	if (currentSlideIndex >= slides.length){
+		currentSlideIndex = 0
+	}
+
+	console.log("Current slide index is " + currentSlideIndex);
+
+	updateCarousel()
+})
 
 
-// Update carousel
+/* Update carousel */
+let currentSlideIndex = 0
+
 function updateCarousel() {
 	// Update dots styling
 	for (let i = 0; i < slides.length; i++) {	
@@ -59,36 +88,8 @@ function updateCarousel() {
 	}
 
 	// Update background image
-	carouselImage.src = "./assets/images/slideshow/" + slides[currentSlideIndex].image;
+	carouselImage.src = "./assets/images/slideshow/" + slides[currentSlideIndex].image
 
 	// Update text
-	carouselTagLine.innerHTML = slides[currentSlideIndex].tagLine;
+	carouselTagLine.innerHTML = slides[currentSlideIndex].tagLine
 }
-
-
-// Listen when click on arrows
-arrow_left.addEventListener('click', function() {
-	// Update currentSlideIndex
-	currentSlideIndex = currentSlideIndex - 1 ;
-
-	if (currentSlideIndex < 0){
-		currentSlideIndex = slides.length - 1;
-	}
-
-	console.log("Current slide index is " + currentSlideIndex);
-
-	updateCarousel();
-})
-
-arrow_right.addEventListener('click', function(){
-	// Update currentSlideIndex
-	currentSlideIndex = currentSlideIndex + 1 ;
-
-	if (currentSlideIndex >= slides.length){
-		currentSlideIndex = 0
-	}
-
-	console.log("Current slide index is " + currentSlideIndex);
-
-	updateCarousel();
-})
