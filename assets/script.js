@@ -18,8 +18,8 @@ const slides = [
 ]
 
 // Get carousel arrows
-const arrow_left = document.getElementById('arrow_left')
-const arrow_right = document.getElementById('arrow_right')
+const arrow_left = document.querySelector(".arrow_left")
+const arrow_right = document.querySelector(".arrow_right")
 
 
 // Create carousel dots
@@ -41,8 +41,8 @@ currentSlideIndex = 0
 
 
 // Get carousel background image and text elements
-carouselImage = document.getElementById('carousel_image');
-carouselTagLine = document.getElementById('carousel_tagLine');
+carouselImage = document.querySelector(".carousel_img")
+carouselTagLine = document.querySelector(".carousel_tagLine")
 
 
 // Update carousel
@@ -85,7 +85,7 @@ arrow_right.addEventListener('click', function(){
 	currentSlideIndex = currentSlideIndex + 1 ;
 
 	if (currentSlideIndex >= slides.length){
-		currentSlideIndex = 0;
+		currentSlideIndex = 0
 	}
 
 	console.log("Current slide index is " + currentSlideIndex);
