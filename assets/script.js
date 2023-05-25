@@ -22,28 +22,9 @@ const arrow_left = document.querySelector(".arrow_left")
 const arrow_right = document.querySelector(".arrow_right")
 
 
-/* Create carousel dots */
-const dots = document.querySelector('#dots')
-
-let dotsArray = []
-
-for (let i = 0; i < slides.length; i++) {
-	dot = document.createElement('div')
-	dot.classList.add('dot')
-	dots.appendChild(dot)
-	
-	dotsArray.push(dot)
-}
-
-dotsArray[0].classList.add('dot_selected')
-
-
-/* Get carousel background image and text elements */
-const carouselImage = document.querySelector(".carousel_img")
-const carouselTagLine = document.querySelector(".carousel_tagLine")
-
-
 /* Listen when click on left arrow */
+let currentSlideIndex = 0
+
 arrow_left.addEventListener('click', function() {
 	// Update currentSlideIndex
 	currentSlideIndex = currentSlideIndex - 1
@@ -52,7 +33,7 @@ arrow_left.addEventListener('click', function() {
 		currentSlideIndex = slides.length - 1
 	}
 
-	console.log("Current slide index is " + currentSlideIndex)
+	console.log("Left arrow clicked! Current slide index is " + currentSlideIndex)
 
 	updateCarousel()
 })
@@ -66,15 +47,37 @@ arrow_right.addEventListener('click', function(){
 		currentSlideIndex = 0
 	}
 
-	console.log("Current slide index is " + currentSlideIndex);
+	console.log("Right arrow clicked! Current slide index is " + currentSlideIndex);
 
 	updateCarousel()
 })
 
 
-/* Update carousel */
-let currentSlideIndex = 0
+/* Create a dot for each slide of slides */
+const dotsArray = []
 
+slides.forEach(() => {
+	const dot = document.createElement('div')
+	dot.classList.add('dot')
+	dotsArray.push(dot)
+})
+
+/* Add the dots to the DOM */
+const dots = document.querySelector('#dots')
+
+for (let dot of dotsArray){
+	dots.appendChild(dot)
+}
+
+dotsArray[0].classList.add('dot_selected')
+
+
+/* Get carousel background image and text elements */
+const carouselImage = document.querySelector(".carousel_img")
+const carouselTagLine = document.querySelector(".carousel_tagLine")
+
+
+/* Update carousel */
 function updateCarousel() {
 	// Update dots styling
 	for (let i = 0; i < slides.length; i++) {	
